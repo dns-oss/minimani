@@ -146,6 +146,20 @@
             height: auto;
             border-radius: 0.25rem;
         }
+        
+        /* Placeholder for missing images */
+        .chart-item .image-placeholder {
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #4b5563;
+            border: 2px dashed #9ca3af;
+            color: #d1d5db;
+            padding: 1rem;
+            text-align: center;
+            font-size: 1rem;
+        }
 
         /* Download Button */
         .download-container {
@@ -261,7 +275,10 @@
 
                 <div class="lg:w-1/2 chart-item">
                     <h3>Win Rate Against Major Competitors</h3>
-                    <img src="Mini2.pdf" alt="Win rate against major competitors chart" class="mt-2">
+                    <img src="win_rate_chart.png" alt="Win rate against major competitors chart">
+                    <div class="image-placeholder">
+                        IMAGE PLACEHOLDER: Please ensure you save the Win Rate chart as 'win_rate_chart.png' in the same directory as this HTML file.
+                    </div>
                 </div>
             </div>
 
@@ -272,7 +289,10 @@
             <div class="flex flex-col lg:flex-row gap-6">
                 <div class="lg:w-1/2 chart-item">
                     <h3>Market Leadership Rate by Top Brands</h3>
-                    <img src="Mini1.pdf" alt="Market leadership rate by top brands chart" class="mt-2">
+                    <img src="leadership_rate_chart.png" alt="Market leadership rate by top brands chart">
+                    <div class="image-placeholder">
+                        IMAGE PLACEHOLDER: Please ensure you save the Market Leadership chart as 'leadership_rate_chart.png' in the same directory as this HTML file.
+                    </div>
                 </div>
 
                 <div class="lg:w-1/2">
@@ -357,7 +377,7 @@
             <div class="text-center py-4">
                 <h3 class="text-xl font-semibold text-white">Ready to deep-dive into these insights?</h3>
                 <p class="text-gray-400 mt-2">Schedule a follow-up meeting to develop category-specific pricing strategies.</p>
-                <a href="https://meetings-eu1.hubspot.com/jonas-jensen" target="_blank" class="book-meeting-btn mt-4">Book a Meeting</a>
+                <a href="https://meetings-eu1.hubspot.com/daniel-self" target="_blank" class="book-meeting-btn mt-4">Book a Meeting</a>
             </div>
 
         </div>
