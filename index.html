@@ -3,334 +3,372 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimani Competitive Analysis Report</title>
+    <title>Executive Market Position Report - Minimani</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Base styles */
+        /* Custom Tailwind Configuration */
+        :root {
+            --color-bg-darkest: #111827;
+            --color-bg-card: #1f2937;
+            --color-text-light: #f3f4f6;
+            --color-text-green: #4ade80; /* text-green-400 */
+            --color-text-red: #f87171; /* text-red-400 */
+            --color-accent-blue: #2563eb; /* bg-blue-600 */
+            --color-table-header: #374151; /* bg-gray-700 */
+            --color-table-row-odd: #1f2937; /* Same as card background for subtle look */
+            --color-table-row-even: #374151;
+        }
+
         body {
+            background-color: var(--color-bg-darkest);
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Dark gray background */
-            color: #d1d5db; /* Light gray text */
-            margin: 0;
-            padding: 20px;
-            line-height: 1.6;
+            color: var(--color-text-light);
+            padding: 2rem;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
         }
 
-        /* Utility classes (mimicking Tailwind for the required style) */
-        .bg-card { background-color: #1f2937; } /* Report card background */
-        .bg-header { background-color: #2563eb; } /* Primary accent blue (bg-blue-600) */
-        .bg-table-header { background-color: #374151; } /* Dark table header (bg-gray-700) */
-        .text-green { color: #4ade80; } /* Text green (text-green-400) */
-        .text-red { color: #f87171; } /* Text red (text-red-400) */
-        .rounded-xl { border-radius: 0.75rem; }
-        .shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
-        .p-8 { padding: 2rem; }
-        .mt-8 { margin-top: 2rem; }
-        .flex-row { display: flex; flex-direction: row; }
-        .justify-between { justify-content: space-between; }
-        .items-center { align-items: center; }
-
-        /* Report container */
-        .report-container {
+        .report-card {
+            background-color: var(--color-bg-card);
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            width: 100%;
             max-width: 1200px;
-            margin: 0 auto;
+            overflow: hidden;
+            position: relative;
         }
 
-        /* Header */
-        .report-header {
+        .header-accent {
+            background-color: var(--color-accent-blue);
             padding: 1.5rem 2rem;
-            color: white;
-            border-top-left-radius: 0.75rem;
-            border-top-right-radius: 0.75rem;
-        }
-        .report-header h1 {
-            margin: 0;
-            font-size: 1.75rem;
-            font-weight: 700;
-        }
-        .report-header p {
-            margin: 0.25rem 0 0 0;
-            font-size: 1rem;
-            opacity: 0.8;
         }
 
-        /* Content sections */
-        .section-title {
-            color: #e5e7eb;
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-top: 2.5rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #374151;
+        .content-section {
+            padding: 2rem;
         }
-        .data-point {
-            background-color: #374151;
+
+        h2 {
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: 700;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #374151;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .kpi-item {
+            background-color: #374151; /* Slightly darker than card for contrast */
             padding: 1rem;
             border-radius: 0.5rem;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        .data-point .value {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-            color: #e5e7eb;
-        }
-        .data-point .label {
-            font-size: 0.875rem;
-            color: #9ca3af;
         }
 
-        /* Tables */
+        .kpi-label {
+            font-size: 0.875rem; /* text-sm */
+            color: #9ca3af; /* text-gray-400 */
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-value {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700;
+        }
+
         table {
             width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            border-radius: 0.5rem;
-            overflow: hidden;
+            border-collapse: collapse;
             margin-top: 1rem;
+            font-size: 0.9rem;
         }
-        th {
+
+        th, td {
             padding: 0.75rem 1rem;
             text-align: left;
+        }
+
+        th {
+            background-color: var(--color-table-header);
             font-weight: 600;
-            color: white;
-            background-color: #374151;
-        }
-        td {
-            padding: 0.75rem 1rem;
-            color: #e5e7eb;
-        }
-        tbody tr:nth-child(even) {
-            background-color: rgba(0, 0, 0, 0.1); /* Slightly darker for even rows */
-        }
-        tbody tr:nth-child(odd) {
-            background-color: rgba(0, 0, 0, 0.05); /* Slightly lighter for odd rows */
+            text-transform: uppercase;
+            font-size: 0.8rem;
         }
 
-        /* Lists */
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        ul li {
-            background-color: #374151;
-            padding: 0.75rem 1rem;
-            border-left: 4px solid #4ade80;
-            margin-bottom: 0.5rem;
-            border-radius: 0.375rem;
-        }
-        ul.negative-list li {
-            border-left: 4px solid #f87171;
+        tr:nth-child(even) {
+            background-color: #374151; /* bg-gray-700 for even rows */
         }
 
-        /* Buttons */
-        .btn {
+        tr:nth-child(odd) {
+            background-color: var(--color-bg-card); /* bg-gray-800 for odd rows */
+        }
+
+        .text-positive {
+            color: var(--color-text-green);
+        }
+
+        .text-negative {
+            color: var(--color-text-red);
+        }
+
+        /* Image Styling */
+        .chart-container {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .chart-item {
+            padding: 1.5rem;
+            background-color: #374151;
+            border-radius: 0.5rem;
+        }
+
+        .chart-item h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #4b5563;
+            padding-bottom: 0.5rem;
+        }
+
+        .chart-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.25rem;
+        }
+
+        /* Download Button */
+        .download-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+
+        .download-btn, .book-meeting-btn {
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
             text-decoration: none;
             display: inline-block;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .btn-download {
-            background-color: #2563eb;
-            color: white;
-            border: none;
-        }
-        .btn-download:hover {
-            background-color: #1d4ed8;
-        }
-        .btn-primary {
-            background-color: #4ade80;
-            color: #1f2937;
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #22c55e;
+            text-align: center;
         }
 
-        /* Call-to-action bar */
-        .cta-bar {
-            position: sticky;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: #1f2937;
-            padding: 1rem 0;
-            border-top: 1px solid #374151;
-            z-index: 10;
-        }
-        .cta-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: flex-end;
+        .download-btn {
+            background-color: #2563eb; /* blue-600 */
+            color: var(--color-text-light);
         }
 
-        /* Grid for data points */
-        .grid-4 {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
+        .download-btn:hover {
+            background-color: #1d4ed8; /* blue-700 */
         }
-        /* Flex for win rate highlights */
-        .flex-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.5rem;
+
+        .book-meeting-btn {
+            background-color: #10b981; /* emerald-500 */
+            color: #111827; /* dark text for contrast */
         }
+
+        .book-meeting-btn:hover {
+            background-color: #059669; /* emerald-600 */
+        }
+
     </style>
-</head>
-<body>
-
-    <div class="report-container">
-        <div class="bg-card rounded-xl shadow-2xl">
-            <div class="report-header bg-header">
-                <h1>Minimani Market Position Report</h1>
-                <p>Executive Market Position Report - Competitive Analysis</p>
-            </div>
-
-            <div class="p-8">
-
-                <div class="section">
-                    <h2 class="section-title">Executive Summary</h2>
-                    <p>
-                        Your market position analysis reveals a **strong competitive standing** with room for strategic improvement.
-                        We are currently tracking **20,112 products** against competitors, with competitive data available for **99.3%** of your catalog.
-                        Focus on category-specific strategies rather than broad pricing adjustments.
-                    </p>
-                    <div class="grid-4 mt-8">
-                        <div class="data-point">
-                            <div class="value">4.4</div>
-                            <div class="label">Average Market Position (Median: 4th)</div>
-                        </div>
-                        <div class="data-point">
-                            <div class="value text-green">15.8%</div>
-                            <div class="label">Price Leadership Rate</div>
-                        </div>
-                        <div class="data-point">
-                            <div class="value text-green">49.1%</div>
-                            <div class="label">Top-3 Market Position</div>
-                        </div>
-                        <div class="data-point">
-                            <div class="value">12.5%</div>
-                            <div class="label">Solo Price Leadership</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section">
-                    <h2 class="section-title">Competitive Edge: Win Rate Analysis</h2>
-
-                    <p>Analysis of your 'win rate' (being the cheapest on price) against major competitors highlights both dominant positions and areas of strategic challenge.</p>
-
-                    <div class="flex-3 mt-8">
-                        <div class="data-point" style="text-align: left; border-left: 5px solid #4ade80;">
-                            <div class="value text-green" style="font-size: 1.5rem;">Cdon.fi: 90.6%</div>
-                            <div class="label">Win rate across 3,312 products—**significant price advantage**.</div>
-                        </div>
-                        <div class="data-point" style="text-align: left; border-left: 5px solid #4ade80;">
-                            <div class="value text-green" style="font-size: 1.5rem;">Wolt.com: 87.1%</div>
-                            <div class="label">Win rate across 3,802 products—strong delivery channel advantage.</div>
-                        </div>
-                        <div class="data-point" style="text-align: left; border-left: 5px solid #4ade80;">
-                            <div class="value text-green" style="font-size: 1.5rem;">K-rauta.fi: 62.0%</div>
-                            <div class="label">Win rate—leading in the hardware/DIY segment.</div>
-                        </div>
-                    </div>
-
-                    <h3 style="color: #e5e7eb; font-size: 1.25rem; font-weight: 600; margin-top: 2rem;">Challenging Competitors</h3>
-                    <div class="flex-3">
-                        <div class="data-point" style="text-align: left; border-left: 5px solid #f87171;">
-                            <div class="value text-red" style="font-size: 1.5rem;">Karkkainen.com: 34.0%</div>
-                            <div class="label">Lowest win rate against largest comparison set (13,803 products).</div>
-                        </div>
-                        <div class="data-point" style="text-align: left; border-left: 5px solid #f87171;">
-                            <div class="value text-red" style="font-size: 1.5rem;">S-kaupat.fi: ~40%</div>
-                            <div class="label">Low win rate suggests price pressure in the mass market.</div>
-                        </div>
-                        <div class="data-point" style="text-align: left; border-left: 5px solid #f87171;">
-                            <div class="value text-red" style="font-size: 1.5rem;">Tokmanni.fi: ~43%</div>
-                            <div class="label">Low win rate suggests price pressure in the mass market.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section">
-                    <h2 class="section-title">Brand Performance Analysis</h2>
-
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
-                        <div>
-                            <h3 style="color: #4ade80; font-size: 1.25rem; margin-bottom: 1rem;">✅ Strong Performers</h3>
-                            <ul class="positive-list">
-                                <li>**Philips** leads with **23.1%** price leadership across 229 products - your strongest competitive brand.</li>
-                                <li>**Sini** achieves **18.8%** leadership with excellent positioning (avg. 3.4 position).</li>
-                                <li>**Opal** maintains **17.2%** leadership with strong top-3 presence (**57.8%**).</li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h3 style="color: #f87171; font-size: 1.25rem; margin-bottom: 1rem;">❌ Challenged Categories</h3>
-                            <ul class="negative-list">
-                                <li>**Lego** struggles significantly with average **10.3 position** and only **2.7% leadership rate**.</li>
-                                <li>**Maybelline** underperforms at **2.8% leadership** despite 213 product catalog.</li>
-                                <li>**Iittala** shows weaker positioning at **6.0 average position**.</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="section">
-                    <h2 class="section-title">Strategic Recommendations</h2>
-
-                    <h3 style="color: #e5e7eb; font-size: 1.25rem; font-weight: 600; margin-top: 2rem;">Immediate Actions</h3>
-                    <ul class="positive-list">
-                        <li style="border-left-color: #f87171;">**Lego Category Review:** Address significant pricing gaps - average 10.3 market position needs strategic review.</li>
-                        <li style="border-left-color: #f87171;">**Kärkkäinen Price Strategy:** Investigate 34% win rate against largest competitor for margin optimization opportunities.</li>
-                        <li>**Leverage Philips Success:** Replicate Philips pricing strategy (23.1% leadership) across similar premium brands.</li>
-                    </ul>
-
-                    <h3 style="color: #e5e7eb; font-size: 1.25rem; font-weight: 600; margin-top: 2rem;">Growth Opportunities</h3>
-                    <ul class="positive-list">
-                        <li>**Strengthen Beauty Portfolio:** Maybelline and similar brands show leadership potential with better pricing.</li>
-                        <li>**Maintain Premium Positioning:** Continue strong performance in Opal, L'Oréal, and Lumene categories.</li>
-                        <li>**Hardware Excellence:** Build on K-Rauta success (62% win rate) to dominate the DIY segment.</li>
-                    </ul>
-                </div>
-
-                <div class="section" style="text-align: center; margin-top: 3rem;">
-                    <h2 class="section-title" style="border: none;">Next Steps</h2>
-                    <p style="margin-bottom: 1.5rem; font-size: 1.125rem;">Discuss these findings and plan your next strategic pricing moves.</p>
-                    <a href="https://meetings-eu1.hubspot.com/jonas-jensen" target="_blank" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1.1rem;">Book a Meeting</a>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <div class="cta-bar">
-        <div class="cta-content">
-            <button class="btn btn-download" onclick="downloadReport()">Download Report (.html)</button>
-        </div>
-    </div>
-
     <script>
         function downloadReport() {
             const htmlContent = document.documentElement.outerHTML;
             const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
+            a.href = url;
             a.download = 'Competitive_Analysis_Report.html';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
     </script>
+</head>
+<body>
+    <div class="report-card">
+        <div class="header-accent">
+            <h1 class="text-3xl font-extrabold text-white">Executive Market Position Report - Minimani</h1>
+            <p class="text-gray-200 mt-1">Analysis of competitive standing across all products and key brands.</p>
+        </div>
+
+        <div class="content-section">
+
+            <h2>Executive Summary</h2>
+            <p class="text-gray-300">
+                Your market position analysis reveals a strong competitive standing with room for strategic improvement. You are tracking 20,112 products, with competitive data available for 99.3% of your catalog. The focus moving forward should be on category-specific strategies rather than broad pricing adjustments.
+            </p>
+
+            <div class="kpi-grid">
+                <div class="kpi-item">
+                    <div class="kpi-label">Average Market Position (Lower is Better)</div>
+                    <div class="kpi-value text-positive">4.4 / 4th</div>
+                    <p class="text-sm text-gray-400">(Median: 4th place)</p>
+                </div>
+                <div class="kpi-item">
+                    <div class="kpi-label">Price Leadership Rate (Top 1 Cheapest)</div>
+                    <div class="kpi-value text-positive">15.8%</div>
+                    <p class="text-sm text-gray-400">(Products where you lead on price)</p>
+                </div>
+                <div class="kpi-item">
+                    <div class="kpi-label">Top-3 Market Position Rate</div>
+                    <div class="kpi-value text-positive">49.1%</div>
+                    <p class="text-sm text-gray-400">(Ranked in top 3 cheapest)</p>
+                </div>
+                <div class="kpi-item">
+                    <div class="kpi-label">Solo Price Leadership Rate</div>
+                    <div class="kpi-value text-positive">12.5%</div>
+                    <p class="text-sm text-gray-400">(Exclusive cheapest option)</p>
+                </div>
+            </div>
+
+            <hr class="my-6 border-gray-700">
+
+            <h2>Competitive Edge & Position Highlights</h2>
+
+            <div class="flex flex-col lg:flex-row gap-6">
+                <div class="lg:w-1/2">
+                    <h3>Dominant Win Rates</h3>
+                    <p class="text-gray-300">Minimani holds significant price advantages and channel strengths against key players, with exceptional win rates over 87%.</p>
+                    <ul class="list-disc list-inside mt-3 space-y-1">
+                        <li class="text-positive">cdon.fi: 90.6% win rate across 3,312 products — significant price advantage.</li>
+                        <li class="text-positive">wolt.com: 87.1% win rate across 3,802 products — strong delivery channel advantage.</li>
+                        <li class="text-positive">k-rauta.fi: 62.0% win rate — leading in the hardware/DIY segment.</li>
+                    </ul>
+
+                    <h3 class="mt-6">Challenging Competitors</h3>
+                    <p class="text-gray-300">Areas where competitors exert notable price pressure, requiring strategic attention.</p>
+                    <ul class="list-disc list-inside mt-3 space-y-1">
+                        <li class="text-negative">karkkainen.com: Only 34.0% win rate across the largest comparison set (13,803 products).</li>
+                        <li class="text-negative">s-kaupat.fi & tokmanni.fi: 40-43% win rates, suggesting high price pressure in the mass market.</li>
+                    </ul>
+                </div>
+
+                <div class="lg:w-1/2 chart-item">
+                    <h3>Win Rate Against Major Competitors</h3>
+                    <img src="Mini2.pdf" alt="Win rate against major competitors chart" class="mt-2">
+                </div>
+            </div>
+
+            <hr class="my-6 border-gray-700">
+
+            <h2>Brand Performance Analysis</h2>
+
+            <div class="flex flex-col lg:flex-row gap-6">
+                <div class="lg:w-1/2 chart-item">
+                    <h3>Market Leadership Rate by Top Brands</h3>
+                    <img src="Mini1.pdf" alt="Market leadership rate by top brands chart" class="mt-2">
+                </div>
+
+                <div class="lg:w-1/2">
+                    <h3>Strategic Brand Insights</h3>
+                    <table class="min-w-full">
+                        <thead>
+                            <tr>
+                                <th>Brand</th>
+                                <th>Leadership Rate</th>
+                                <th>Avg. Position</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Philips</td>
+                                <td class="text-positive">23.1%</td>
+                                <td>N/A</td>
+                                <td>Your strongest competitive brand.</td>
+                            </tr>
+                            <tr>
+                                <td>Sini</td>
+                                <td class="text-positive">18.8%</td>
+                                <td>3.4</td>
+                                <td>Excellent positioning.</td>
+                            </tr>
+                            <tr>
+                                <td>Opal</td>
+                                <td class="text-positive">17.2%</td>
+                                <td>N/A</td>
+                                <td>Strong Top-3 presence (57.8%).</td>
+                            </tr>
+                            <tr>
+                                <td>Lego</td>
+                                <td class="text-negative">2.7%</td>
+                                <td class="text-negative">10.3</td>
+                                <td>Struggles significantly; requires strategic review.</td>
+                            </tr>
+                            <tr>
+                                <td>Maybelline</td>
+                                <td class="text-negative">2.8%</td>
+                                <td>N/A</td>
+                                <td>Underperforms despite product catalog.</td>
+                            </tr>
+                            <tr>
+                                <td>Iittala</td>
+                                <td>N/A</td>
+                                <td>6.0</td>
+                                <td>Weaker positioning.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <hr class="my-6 border-gray-700">
+
+            <h2>Strategic Recommendations</h2>
+
+            <div class="flex gap-6">
+                <div class="w-1/2">
+                    <h3 class="text-green-400">Immediate Actions</h3>
+                    <ul class="list-disc list-inside mt-3 space-y-2 text-gray-300">
+                        <li>Lego Category Review: Address significant pricing gaps. The average 10.3 market position requires strategic review.</li>
+                        <li>Kärkkäinen Price Strategy: Investigate the 34% win rate against the largest competitor for margin optimization opportunities.</li>
+                        <li>Leverage Philips Success: Replicate the Philips pricing strategy (23.1% leadership) across similar premium brands.</li>
+                    </ul>
+                </div>
+                <div class="w-1/2">
+                    <h3 class="text-green-400">Growth Opportunities</h3>
+                    <ul class="list-disc list-inside mt-3 space-y-2 text-gray-300">
+                        <li>Strengthen Beauty Portfolio: Maybelline and similar brands show leadership potential with better pricing.</li>
+                        <li>Maintain Premium Positioning: Continue strong performance in Opal, L'Oréal, and Lumene categories.</li>
+                        <li>Hardware Excellence: Build on K-Rauta success (62% win rate) to dominate the DIY segment.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr class="my-6 border-gray-700">
+
+            <div class="text-center py-4">
+                <h3 class="text-xl font-semibold text-white">Ready to deep-dive into these insights?</h3>
+                <p class="text-gray-400 mt-2">Schedule a follow-up meeting to develop category-specific pricing strategies.</p>
+                <a href="https://meetings-eu1.hubspot.com/jonas-jensen" target="_blank" class="book-meeting-btn mt-4">Book a Meeting</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="download-container">
+        <button onclick="downloadReport()" class="download-btn">
+            Download Report (HTML)
+        </button>
+    </div>
+
 </body>
 </html>
