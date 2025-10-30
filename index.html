@@ -119,64 +119,43 @@
             color: var(--color-text-red);
         }
 
-        /* Chart Styling */
-        .chart-item {
-            padding: 1.5rem;
-            background-color: #374151;
+        /* Download Button */
+        .download-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+        }
+
+        .download-btn, .book-meeting-btn {
+            padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
-            position: relative;
-        }
-
-        .chart-container-bar {
-            height: 350px;
-            display: flex;
-            align-items: flex-end;
-            gap: 5px;
-            padding-bottom: 30px; /* Space for labels */
-            position: relative;
-            border-left: 1px solid #4b5563;
-            border-bottom: 1px solid #4b5563;
-        }
-
-        .chart-bar {
-            flex-grow: 1;
-            background-color: #f3f4f6; /* Default color */
-            border-top-left-radius: 3px;
-            border-top-right-radius: 3px;
-            position: relative;
-            min-width: 15px;
-        }
-
-        .chart-label-x {
-            position: absolute;
-            bottom: -25px;
-            width: 100%;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
             text-align: center;
-            font-size: 0.75rem;
-            color: #d1d5db;
-            transform: rotate(-45deg);
-            transform-origin: 50% 100%;
-            white-space: nowrap;
         }
 
-        .y-axis-label {
-            position: absolute;
-            left: -35px;
-            font-size: 0.8rem;
-            color: #9ca3af;
+        .download-btn {
+            background-color: #2563eb; /* blue-600 */
+            color: var(--color-text-light);
         }
 
-        /* Specific Bar Colors (Approximating the provided image's palette) */
-        .bar-color-1 { background-color: #8B0000; } /* Dark Red */
-        .bar-color-2 { background-color: #CC3333; }
-        .bar-color-3 { background-color: #FF6633; }
-        .bar-color-4 { background-color: #FF9966; }
-        .bar-color-5 { background-color: #FFCC99; }
-        .bar-color-6 { background-color: #FFFFCC; }
-        .bar-color-7 { background-color: #CCFF99; }
-        .bar-color-8 { background-color: #99FF99; }
-        .bar-color-9 { background-color: #66CCCC; }
-        .bar-color-10 { background-color: #336699; } /* Dark Blue */
+        .download-btn:hover {
+            background-color: #1d4ed8; /* blue-700 */
+        }
+
+        .book-meeting-btn {
+            background-color: #10b981; /* emerald-500 */
+            color: #111827; /* dark text for contrast */
+        }
+
+        .book-meeting-btn:hover {
+            background-color: #059669; /* emerald-600 */
+        }
+
     </style>
     <script>
         function downloadReport() {
@@ -204,29 +183,29 @@
 
             <h2>Executive Summary</h2>
             <p class="text-gray-300">
-                [cite_start]Your market position analysis reveals a strong competitive standing with room for strategic improvement[cite: 127]. [cite_start]You are tracking 20,112 products, with competitive data available for 99.3% of your catalog[cite: 128]. [cite_start]The focus moving forward should be on category-specific strategies rather than broad pricing adjustments[cite: 48].
+                Your market position analysis reveals a strong competitive standing with room for strategic improvement. You are tracking 20,112 products, with competitive data available for 99.3% of your catalog. The focus moving forward should be on category-specific strategies rather than broad pricing adjustments.
             </p>
 
             <div class="kpi-grid">
                 <div class="kpi-item">
                     <div class="kpi-label">Average Market Position (Lower is Better)</div>
                     <div class="kpi-value text-positive">4.4 / 4th</div>
-                    [cite_start]<p class="text-sm text-gray-400">(Median: 4th place) [cite: 130]</p>
+                    <p class="text-sm text-gray-400">(Median: 4th place)</p>
                 </div>
                 <div class="kpi-item">
                     <div class="kpi-label">Price Leadership Rate (Top 1 Cheapest)</div>
                     <div class="kpi-value text-positive">15.8%</div>
-                    [cite_start]<p class="text-sm text-gray-400">(Products where you lead on price) [cite: 131]</p>
+                    <p class="text-sm text-gray-400">(Products where you lead on price)</p>
                 </div>
                 <div class="kpi-item">
                     <div class="kpi-label">Top-3 Market Position Rate</div>
                     <div class="kpi-value text-positive">49.1%</div>
-                    [cite_start]<p class="text-sm text-gray-400">(Ranked in top 3 cheapest) [cite: 132]</p>
+                    <p class="text-sm text-gray-400">(Ranked in top 3 cheapest)</p>
                 </div>
                 <div class="kpi-item">
                     <div class="kpi-label">Solo Price Leadership Rate</div>
                     <div class="kpi-value text-positive">12.5%</div>
-                    [cite_start]<p class="text-sm text-gray-400">(Exclusive cheapest option) [cite: 133]</p>
+                    <p class="text-sm text-gray-400">(Exclusive cheapest option)</p>
                 </div>
             </div>
 
@@ -234,115 +213,31 @@
 
             <h2>Competitive Edge & Position Highlights</h2>
 
-            <div class="flex flex-col lg:flex-row gap-6">
-                <div class="lg:w-1/2">
+            <div class="flex flex-col gap-6">
+                <div class="w-full">
                     <h3>Dominant Win Rates</h3>
-                    [cite_start]<p class="text-gray-300">Minimani holds significant price advantages and channel strengths against key players, with exceptional win rates over 87%[cite: 35].</p>
+                    <p class="text-gray-300">Minimani holds significant price advantages and channel strengths against key players, with exceptional win rates over 87%.</p>
                     <ul class="list-disc list-inside mt-3 space-y-1">
-                        [cite_start]<li class="text-positive">cdon.fi: 90.6% win rate across 3,312 products — significant price advantage[cite: 35].</li>
-                        [cite_start]<li class="text-positive">wolt.com: 87.1% win rate across 3,802 products — strong delivery channel advantage[cite: 35].</li>
-                        [cite_start]<li class="text-positive">k-rauta.fi: 62.0% win rate — leading in the hardware/DIY segment[cite: 35].</li>
+                        <li class="text-positive">cdon.fi: 90.6% win rate across 3,312 products — significant price advantage.</li>
+                        <li class="text-positive">wolt.com: 87.1% win rate across 3,802 products — strong delivery channel advantage.</li>
+                        <li class="text-positive">k-rauta.fi: 62.0% win rate — leading in the hardware/DIY segment.</li>
                     </ul>
 
                     <h3 class="mt-6">Challenging Competitors</h3>
-                    [cite_start]<p class="text-gray-300">Areas where competitors exert notable price pressure, requiring strategic attention[cite: 37].</p>
+                    <p class="text-gray-300">Areas where competitors exert notable price pressure, requiring strategic attention.</p>
                     <ul class="list-disc list-inside mt-3 space-y-1">
-                        [cite_start]<li class="text-negative">karkkainen.com: Only 34.0% win rate across the largest comparison set (13,803 products)[cite: 37].</li>
-                        [cite_start]<li class="text-negative">s-kaupat.fi & tokmanni.fi: 40-43% win rates, suggesting high price pressure in the mass market[cite: 37].</li>
+                        <li class="text-negative">karkkainen.com: Only 34.0% win rate across the largest comparison set (13,803 products).</li>
+                        <li class="text-negative">s-kaupat.fi & tokmanni.fi: 40-43% win rates, suggesting high price pressure in the mass market.</li>
                     </ul>
                 </div>
-
-                <div class="lg:w-1/2 chart-item">
-                    <h3>Win Rate Against Major Competitors</h3>
-                    <div class="chart-container-bar">
-                        <div class="y-axis-label" style="bottom: 300px;">90</div>
-                        <div class="y-axis-label" style="bottom: 250px;">75</div>
-                        <div class="y-axis-label" style="bottom: 200px;">60</div>
-                        <div class="y-axis-label" style="bottom: 150px;">45</div>
-                        <div class="y-axis-label" style="bottom: 100px;">30</div>
-                        <div class="y-axis-label" style="bottom: 50px;">15</div>
-                        <div class="y-axis-label" style="bottom: 0px;">0</div>
-                        <div class="chart-bar bar-color-1" style="height: calc(90.6% * 300px / 90);">
-                            <div class="chart-label-x">Cdon.fi</div>
-                        </div>
-                        <div class="chart-bar bar-color-2" style="height: calc(87.1% * 300px / 90);">
-                            <div class="chart-label-x">Wolt.com</div>
-                        </div>
-                        <div class="chart-bar bar-color-3" style="height: calc(62.0% * 300px / 90);">
-                            <div class="chart-label-x">K-rauta.fi</div>
-                        </div>
-                        <div class="chart-bar bar-color-4" style="height: calc(49.0% * 300px / 90);">
-                            <div class="chart-label-x">Halpahall</div>
-                        </div>
-                        <div class="chart-bar bar-color-5" style="height: calc(46.0% * 300px / 90);">
-                            <div class="chart-label-x">Puulo.fi</div>
-                        </div>
-                        <div class="chart-bar bar-color-6" style="height: calc(46.0% * 300px / 90);">
-                            <div class="chart-label-x">Prisma.fi</div>
-                        </div>
-                        <div class="chart-bar bar-color-7" style="height: calc(43.0% * 300px / 90);">
-                            <div class="chart-label-x">Keskisenk</div>
-                        </div>
-                        <div class="chart-bar bar-color-8" style="height: calc(41.5% * 300px / 90);">
-                            <div class="chart-label-x">Tokmanni</div>
-                        </div>
-                        <div class="chart-bar bar-color-9" style="height: calc(41.5% * 300px / 90);">
-                            <div class="chart-label-x">S-kaupat</div>
-                        </div>
-                        <div class="chart-bar bar-color-10" style="height: calc(34.0% * 300px / 90);">
-                            <div class="chart-label-x">Karkkaine</div>
-                        </div>
-                    </div>
                 </div>
-            </div>
 
             <hr class="my-6 border-gray-700">
 
             <h2>Brand Performance Analysis</h2>
 
-            <div class="flex flex-col lg:flex-row gap-6">
-                <div class="lg:w-1/2 chart-item">
-                    <h3>Market Leadership Rate by Top Brands</h3>
-                    <div class="chart-container-bar" style="height: 300px;">
-                        <div class="y-axis-label" style="bottom: 270px;">22</div>
-                        <div class="y-axis-label" style="bottom: 200px;">16</div>
-                        <div class="y-axis-label" style="bottom: 130px;">10</div>
-                        <div class="y-axis-label" style="bottom: 60px;">4</div>
-                        <div class="y-axis-label" style="bottom: 0px;">0</div>
-                        <div class="chart-bar bar-color-1" style="height: calc(23.1% * 270px / 22);">
-                            <div class="chart-label-x">Philips</div>
-                        </div>
-                        <div class="chart-bar bar-color-2" style="height: calc(18.8% * 270px / 22);">
-                            <div class="chart-label-x">Sini</div>
-                        </div>
-                        <div class="chart-bar bar-color-3" style="height: calc(17.2% * 270px / 22);">
-                            <div class="chart-label-x">Opal</div>
-                        </div>
-                        <div class="chart-bar bar-color-4" style="height: calc(16.5% * 270px / 22);">
-                            <div class="chart-label-x">Lumene</div>
-                        </div>
-                        <div class="chart-bar bar-color-5" style="height: calc(16.0% * 270px / 22);">
-                            <div class="chart-label-x">Loreal p</div>
-                        </div>
-                        <div class="chart-bar bar-color-6" style="height: calc(15.0% * 270px / 22);">
-                            <div class="chart-label-x">Nedis</div>
-                        </div>
-                        <div class="chart-bar bar-color-7" style="height: calc(14.8% * 270px / 22);">
-                            <div class="chart-label-x">Essence</div>
-                        </div>
-                        <div class="chart-bar bar-color-8" style="height: calc(10.0% * 270px / 22);">
-                            <div class="chart-label-x">Fiskars</div>
-                        </div>
-                        <div class="chart-bar bar-color-9" style="height: calc(9.0% * 270px / 22);">
-                            <div class="chart-label-x">Pista</div>
-                        </div>
-                        <div class="chart-bar bar-color-10" style="height: calc(9.0% * 270px / 22);">
-                            <div class="chart-label-x">Arabia</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="lg:w-1/2">
+            <div class="flex flex-col gap-6">
+                <div class="w-full">
                     <h3>Strategic Brand Insights</h3>
                     <table class="min-w-full">
                         <thead>
@@ -358,37 +253,37 @@
                                 <td>Philips</td>
                                 <td class="text-positive">23.1%</td>
                                 <td>N/A</td>
-                                [cite_start]<td>Your strongest competitive brand across 229 products[cite: 75].</td>
+                                <td>Your strongest competitive brand across 229 products.</td>
                             </tr>
                             <tr>
                                 <td>Sini</td>
                                 <td class="text-positive">18.8%</td>
                                 <td>3.4</td>
-                                [cite_start]<td>Achieves excellent positioning[cite: 76].</td>
+                                <td>Achieves excellent positioning.</td>
                             </tr>
                             <tr>
                                 <td>Opal</td>
                                 <td class="text-positive">17.2%</td>
                                 <td>N/A</td>
-                                [cite_start]<td>Maintains strong top-3 presence (57.8%)[cite: 77].</td>
+                                <td>Maintains strong top-3 presence (57.8%).</td>
                             </tr>
                             <tr>
                                 <td>Lego</td>
                                 <td class="text-negative">2.7%</td>
                                 <td class="text-negative">10.3</td>
-                                [cite_start]<td>Struggles significantly; requires strategic review[cite: 79, 40].</td>
+                                <td>Struggles significantly; requires strategic review.</td>
                             </tr>
                             <tr>
                                 <td>Maybelline</td>
                                 <td class="text-negative">2.8%</td>
                                 <td>N/A</td>
-                                [cite_start]<td>Underperforms despite 213 product catalog[cite: 79].</td>
+                                <td>Underperforms despite 213 product catalog.</td>
                             </tr>
                             <tr>
                                 <td>Iittala</td>
                                 <td>N/A</td>
                                 <td>6.0</td>
-                                [cite_start]<td>Shows weaker positioning[cite: 80].</td>
+                                <td>Shows weaker positioning.</td>
                             </tr>
                         </tbody>
                     </table>
@@ -404,17 +299,17 @@
                 <div class="w-1/2">
                     <h3 class="text-green-400">Immediate Actions</h3>
                     <ul class="list-disc list-inside mt-3 space-y-2 text-gray-300">
-                        [cite_start]<li>Lego Category Review: Address significant pricing gaps; average 10.3 market position needs strategic review[cite: 40].</li>
-                        [cite_start]<li>Kärkkäinen Price Strategy: Investigate 34% win rate against the largest competitor for margin optimization opportunities[cite: 41, 37].</li>
-                        [cite_start]<li>Leverage Philips Success: Replicate Philips pricing strategy (23.1% leadership) across similar premium brands[cite: 42, 75].</li>
+                        <li>Lego Category Review: Address significant pricing gaps; average 10.3 market position needs strategic review.</li>
+                        <li>Kärkkäinen Price Strategy: Investigate 34% win rate against the largest competitor for margin optimization opportunities.</li>
+                        <li>Leverage Philips Success: Replicate Philips pricing strategy (23.1% leadership) across similar premium brands.</li>
                     </ul>
                 </div>
                 <div class="w-1/2">
                     <h3 class="text-green-400">Growth Opportunities</h3>
                     <ul class="list-disc list-inside mt-3 space-y-2 text-gray-300">
-                        [cite_start]<li>Strengthen Beauty Portfolio: Maybelline and similar brands show leadership potential with better pricing[cite: 44, 79].</li>
-                        [cite_start]<li>Maintain Premium Positioning: Continue strong performance in Opal, L'Oréal, and Lumene categories[cite: 45].</li>
-                        [cite_start]<li>Hardware Excellence: Build on K-Rauta success (62% win rate) to dominate the DIY segment[cite: 46, 35].</li>
+                        <li>Strengthen Beauty Portfolio: Maybelline and similar brands show leadership potential with better pricing.</li>
+                        <li>Maintain Premium Positioning: Continue strong performance in Opal, L'Oréal, and Lumene categories.</li>
+                        <li>Hardware Excellence: Build on K-Rauta success (62% win rate) to dominate the DIY segment.</li>
                     </ul>
                 </div>
             </div>
